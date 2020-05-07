@@ -1,0 +1,5 @@
+D:\MyProjects\JK\Sources\Tools\ToolBusiness\bin\Debug\netstandard2.0\ToolBusiness.deps.json
+D:\MyProjects\JK\Sources\Tools\ToolBusiness\bin\Debug\netstandard2.0\ToolBusiness.dll
+D:\MyProjects\JK\Sources\Tools\ToolBusiness\obj\Debug\netstandard2.0\ToolBusiness.csprojAssemblyReference.cache
+D:\MyProjects\JK\Sources\Tools\ToolBusiness\obj\Debug\netstandard2.0\ToolBusiness.AssemblyInfoInputs.cache
+D:\MyProjects\JK\Sources\Tools\ToolBusiness\obj\Debug\netstandard2.0\ToolBusiness.AssemblyInfo.cs

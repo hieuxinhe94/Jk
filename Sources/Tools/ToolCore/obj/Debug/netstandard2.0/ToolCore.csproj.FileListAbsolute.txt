@@ -1,0 +1,5 @@
+D:\MyProjects\JK\Sources\Tools\ToolCore\bin\Debug\netstandard2.0\ToolCore.deps.json
+D:\MyProjects\JK\Sources\Tools\ToolCore\bin\Debug\netstandard2.0\ToolCore.dll
+D:\MyProjects\JK\Sources\Tools\ToolCore\obj\Debug\netstandard2.0\ToolCore.csprojAssemblyReference.cache
+D:\MyProjects\JK\Sources\Tools\ToolCore\obj\Debug\netstandard2.0\ToolCore.AssemblyInfoInputs.cache
+D:\MyProjects\JK\Sources\Tools\ToolCore\obj\Debug\netstandard2.0\ToolCore.AssemblyInfo.cs

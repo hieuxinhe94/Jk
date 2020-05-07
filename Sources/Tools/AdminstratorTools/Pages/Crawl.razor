@@ -1,0 +1,73 @@
+﻿@page "/crawl"
+@page "/crawl/{strategy}"
+@page "/crawl/{strategy}/{method}"
+
+@code {
+    [Parameter]
+    public string strategy { get; set; }
+    [Parameter]
+    public string method { get; set; }
+
+    private int processPercent { get; set; } = 0;
+
+    protected override void OnInitialized()
+    {
+        strategy = strategy ?? "";
+    }
+}
+
+@{ if (processPercent > 0)
+    {
+    <h3>
+        Crawling @strategy strategy and @method method (@processPercent %).
+    </h3>
+    } }
+
+<div class="social-box">
+    <div class="container">
+        @{ if (string.IsNullOrEmpty(method))
+            {
+                <div class="row">
+                    <div class="col-lg-4 col-xs-12 text-center">
+                        <div class="box">
+                            <i class="fa fa-behance fa-3x" aria-hidden="true"></i>
+                            <div class="box-title">
+                                <h3>Grammar strategy</h3>
+                            </div>
+                            <div class="box-text">
+                                <span>A built-in strategy to scrap this site content.</span>
+                            </div>
+                            <div class="box-btn">
+                                <button class="btn btn-primary" @onclick="@(() => chooseStrategyMethod("grammar"))">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            } }
+
+        @{ if (processPercent > 0)
+            {
+                <div class="sonar-wrapper">
+                    <div class="sonar-emitter">
+                        <div class="sonar-wave"></div>
+                    </div>
+                </div>
+            } }
+    </div>
+</div>
+
+@code {
+
+    void chooseStrategyMethod(string _method)
+    {
+        method = _method;
+
+        processMethod();
+    }
+
+    void processMethod()
+    {
+        processPercent++;
+    }
+
+}
