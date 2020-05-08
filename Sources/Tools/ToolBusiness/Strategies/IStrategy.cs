@@ -8,7 +8,7 @@ namespace ToolBusiness.Strategies
 {
     public interface IStrategy
     {
-        ICollection<Quiz> Scrapping();
+        ICollection<QuizModuleGroup> Scrapping();
         Task<ICollection<Quiz>> ScrappingAsync();
     }
 }

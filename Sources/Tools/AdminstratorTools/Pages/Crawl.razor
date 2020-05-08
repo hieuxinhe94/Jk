@@ -2,12 +2,17 @@
 @page "/crawl/{strategy}"
 @page "/crawl/{strategy}/{method}"
 
+@using ToolBusiness;
+@using ToolBusiness.Strategies;
+@using ToolCore.Entities;
+
 @code {
     [Parameter]
     public string strategy { get; set; }
     [Parameter]
     public string method { get; set; }
 
+    private List<QuizModuleGroup> crawlOuput { get; set; }
     private int processPercent { get; set; } = 0;
 
     protected override void OnInitialized()
@@ -18,9 +23,9 @@
 
 @{ if (processPercent > 0)
     {
-    <h3>
-        Crawling @strategy strategy and @method method (@processPercent %).
-    </h3>
+        <h3>
+            Crawling @strategy strategy and @method method (@processPercent %).
+        </h3>
     } }
 
 <div class="social-box">
@@ -38,14 +43,14 @@
                                 <span>A built-in strategy to scrap this site content.</span>
                             </div>
                             <div class="box-btn">
-                                <button class="btn btn-primary" @onclick="@(() => chooseStrategyMethod("grammar"))">Continue</button>
+                                <button class="btn btn-primary" @onclick="@(() => chooseStrategyMethod("EnglishTestStore"))">Continue</button>
                             </div>
                         </div>
                     </div>
                 </div>
             } }
 
-        @{ if (processPercent > 0)
+        @{ if (processPercent > 0 && processPercent != 100)
             {
                 <div class="sonar-wrapper">
                     <div class="sonar-emitter">
@@ -53,8 +58,15 @@
                     </div>
                 </div>
             } }
+
+
     </div>
 </div>
+
+@{ if (processPercent == 100 && crawlOuput != null)
+    {
+        <CrawlOutput Data="crawlOuput"></CrawlOutput>
+    } }
 
 @code {
 
@@ -68,6 +80,25 @@
     void processMethod()
     {
         processPercent++;
+        IStrategy strategy = Tools.ExtractStrategy(method);
+
+        if (strategy != null)
+        {
+            try
+            {
+                crawlOuput = strategy.Scrapping().ToList();
+                processPercent = 100;
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                processPercent = 100;
+            }
+        }
     }
 
 }

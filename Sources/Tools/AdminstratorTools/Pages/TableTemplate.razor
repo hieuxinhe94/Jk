@@ -1,0 +1,156 @@
+﻿@page "/result"
+@using ToolCore.Entities;
+
+@code {
+    [Parameter]
+    public List<QuizModule> Data { get; set; }
+    public List<QuizGroupSection> QuizGroupSections { get; set; }
+    public List<QuizGroup> QuizGroups { get; set; }
+    public List<Quiz> Quizes { get; set; }
+    public int Count { get; set; } = 1;
+}
+
+<h3>abc</h3>
+
+<table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Desc</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    @{ if (Data != null)
+        {
+            Count = 1;
+            foreach (var item in Data)
+            {
+
+                <tr>
+                    <td>@Count</td>
+                    <td>@item.Title</td>
+                    <td>@item.Desc</td>
+                    <td class="text-center">
+                        <button @onclick="@(() => viewDetailQuizGroupSection(item.QuizGroupSections))" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> View Details</button>
+                    </td>
+                </tr>
+
+                Count++;
+            }
+        }}
+</table>
+
+<table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Desc</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    @{ if (QuizGroupSections != null)
+        {
+            Count = 1;
+            foreach (var item in QuizGroupSections)
+            {
+
+                <tr>
+                    <td>@Count</td>
+                    <td>@item.Title</td>
+                    <td>@item.Desc</td>
+                    <td class="text-center">
+                        <button @onclick="@(() => viewDetailQuizGroup(item.QuizGroups))" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> View Details</button>
+                    </td>
+                </tr>
+
+                Count++;
+            }
+        }
+    }
+</table>
+
+
+<table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Desc</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    @{if (QuizGroups != null)
+        {
+            Count = 1;
+            foreach (var item in QuizGroups)
+            {
+
+                <tr>
+                    <td>@Count</td>
+                    <td>@item.Title</td>
+                    <td>@item.Desc</td>
+                    <td>
+                        <button @onclick="@(() => viewDetailQuizes(item.Quizes))" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> View Details</button>
+                    </td>
+                </tr>
+
+                Count++;
+            }
+        }
+    }
+</table>
+
+<table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th style="width: 5%">ID</th>
+            <th style="width: 30%">Title</th>
+            <th style="width: 15%">Desc</th>
+            <th style="width: 50%" >Details</th>
+        </tr>
+    </thead>
+    @{if (Quizes != null)
+        {
+            Count = 1;
+            foreach (var item in Quizes)
+            {
+
+                <tr>
+                    <td>@Count</td>
+                    <td>@item.Title</td>
+                    <td>@item.Desc</td>
+                    <td>
+                        <ul>
+                            @foreach (var choice in item.Choices)
+                            {
+                                <li>@choice.Text (@choice.IsCorrect)</li>
+                            }
+
+                        </ul>
+                    </td>
+                </tr>
+
+                Count++;
+            }
+        }
+    }
+</table>
+
+@{
+    void viewDetailQuizGroupSection(ICollection<QuizGroupSection> data)
+    {
+        QuizGroupSections = data.ToList();
+    }
+
+    void viewDetailQuizGroup(ICollection<QuizGroup> data)
+    {
+        QuizGroups = data.ToList();
+    }
+
+    void viewDetailQuizes(ICollection<Quiz> data)
+    {
+        Quizes = data.ToList();
+    }
+}

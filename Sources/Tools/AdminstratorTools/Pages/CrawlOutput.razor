@@ -1,0 +1,52 @@
+﻿@using ToolCore.Entities;
+
+@code {
+    [Parameter]
+    public List<QuizModuleGroup> Data { get; set; }
+    public List<QuizModule> QuizModule { get; set; }
+    public int Count { get; set; } = 1;
+}
+
+<div class="container">
+    <div class="row col-md-12 col-md-offset-1 custyle">
+        <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th style="width: 5%">ID</th>
+                    <th style="width: 30%">Title</th>
+                    <th style="width: 15%">Desc</th>
+                    <th style="width: 50%" class="text-center">Action</th>
+                </tr>
+            </thead>
+            @{
+                foreach (var item in Data)
+                {
+
+                    <tr>
+                        <td>@Count</td>
+                        <td>@item.Title</td>
+                        <td>@item.Desc</td>
+                        <td class="text-center">
+                            <button @onclick="@(() => viewDetail(item.QuizModules))" class='btn btn-info btn-xs' ><span class="glyphicon glyphicon-edit"></span> View Details</button>
+                        </td>
+                    </tr>
+
+                    Count++;
+                }}
+        </table>
+
+        <hr />
+
+        @{ if (QuizModule != null)
+            {
+                <TableTemplate Data="QuizModule"></TableTemplate>
+            } }
+    </div>
+</div>
+
+@{
+    void viewDetail(ICollection<QuizModule> data)
+    {
+        QuizModule = data.ToList();
+    }
+}

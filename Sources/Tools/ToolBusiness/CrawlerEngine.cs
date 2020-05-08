@@ -9,12 +9,23 @@ namespace Crawler.Business
 {
     public class CrawlerEngine
     {
-        public static async Task<string> GetResponseString(string url)
+        public static async Task<string> GetResponseStringAsync(string url)
         {
             using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(url);
                 var contents = await response.Content.ReadAsStringAsync();
+
+                return contents;
+            }
+        }
+
+        public static string GetResponseString(string url)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var response =  httpClient.GetAsync(url).Result;
+                var contents = response.Content.ReadAsStringAsync().Result;
 
                 return contents;
             }
